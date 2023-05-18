@@ -60,16 +60,24 @@ const main = async () => {
         tag,
         instanceCount: 1,
         akashMachineImageName,
-        ports: mapPorts(inputPorts),
-        env: mapVariables(inputVariables),
-        commands: commands.split(","),
-        args: args.split(","),
+        ports: inputPorts ? mapPorts(inputPorts) : [],
+        env: inputVariables ? mapVariables(inputVariables) : [],
+        commands: commands ? commands.split(",") : [],
+        args: args ? args.split(",") : [],
         region,
       },
       uniqueTopicId: uuid.v4(),
     };
 
     console.log(JSON.stringify(requestBody));
+
+    const createResponse = await http.postJson(
+      "https://api-v2.spheron.network/v1/cluster-instance/create",
+      requestBody
+    );
+    console.log(createResponse.message.statusCode);
+    const createBody = JSON.parse(await createResponse.readBody());
+    console.log(createBody);
   } catch (error) {
     core.setFailed(error.message);
   }
