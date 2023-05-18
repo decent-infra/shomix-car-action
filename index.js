@@ -75,9 +75,8 @@ const main = async () => {
       "https://api-v2.spheron.network/v1/cluster-instance/create",
       requestBody
     );
-    console.log(createResponse);
-    const createBody = JSON.parse(await createResponse.readBody());
-    console.log(createBody);
+    console.log(createResponse.statusCode);
+    console.log(createResponse.result);
   } catch (error) {
     core.setFailed(error.message);
   }
