@@ -30,7 +30,7 @@ const main = async () => {
     const tag = core.getInput("tag");
     const healthCheckUrl = core.getInput("health-check-path");
     const healthCheckPort = core.getInput("health-check-port");
-    const akashMachineImageName = core.getInput("akash-machine-image-name");
+    const akashMachineImageName = core.getInput("instance-plan-name");
     const inputPorts = core.getInput("ports");
     const inputVariables = core.getInput("environment-variables");
     const commands = core.getInput("commands");
