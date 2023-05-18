@@ -32,7 +32,7 @@ const main = async () => {
       "https://api-v2.spheron.network/v1/api-keys/scope"
     );
     console.log(res.message.statusCode);
-    const body = JSON.stringify(await res.readBody());
+    const body = JSON.parse(await res.readBody());
     console.log(body);
 
     const requestBody = {
