@@ -26,6 +26,9 @@ inputs:
   instance-plan-name:
     description: "The name of the instance plan"
     required: true
+  ports:
+    description: "The ports to expose. Format: 80:8080,443:8443,..."
+    required: false
 runs:
   using: "node16"
   main: "index.js"
