@@ -1,0 +1,25 @@
+{
+  "clusterName": "github-action-cluster",
+  "clusterUrl": "https://hub.docker.com/repository/docker/vocoront/simple-express-server/general",
+  "clusterProvider": "DOCKERHUB",
+  "organizationId": "636be25570390bbde15ade3f",
+  "healthCheckUrl": "/",
+  "healthCheckPort": "80",
+  "configuration": {
+    "protocol": "akash",
+    "image": "vocoront/simple-express-server",
+    "tag": "v1.0.5",
+    "instanceCount": 1,
+    "akashMachineImageName": "",
+    "ports": [
+      { "containerPort": "8080", "exposedPort": "80" },
+      { "containerPort": "3000", "exposedPort": "3000" }
+    ],
+    "env": [
+      { "value": "VAR1=value1", "isSecret": false },
+      { "value": "VAR2=value2", "isSecret": false }
+    ],
+    "commands": ["exec"],
+    "args": ["12324"]
+  }
+}

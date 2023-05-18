@@ -1,6 +1,7 @@
 const core = require("@actions/core");
 const httpm = require("@actions/http-client");
 const auth = require("@actions/http-client/lib/auth");
+const uuid = require("uuid");
 
 const mapPorts = (ports) => {
   return ports.split(",").map((port) => {
@@ -34,6 +35,7 @@ const main = async () => {
     const inputVariables = core.getInput("environment-variables");
     const commands = core.getInput("commands");
     const args = core.getInput("args");
+    const region = core.getInput("region");
 
     const bearerToken = new auth.BearerCredentialHandler(token);
 
@@ -50,8 +52,8 @@ const main = async () => {
       clusterUrl,
       clusterProvider: "DOCKERHUB",
       organizationId: body.organizations[0].id,
-      healthCheckUrl,
-      healthCheckPort,
+      healthCheckUrl: healthCheckUrl ?? "",
+      healthCheckPort: healthCheckPort ?? "",
       configuration: {
         protocol: "akash",
         image,
@@ -62,7 +64,9 @@ const main = async () => {
         env: mapVariables(inputVariables),
         commands: commands.split(","),
         args: args.split(","),
+        region,
       },
+      uniqueTopicId: uuid.v4(),
     };
 
     console.log(JSON.stringify(requestBody));

@@ -19,6 +19,7 @@
   "homepage": "https://github.com/decent-infra/shomix-car-action#readme",
   "dependencies": {
     "@actions/core": "^1.10.0",
-    "@actions/http-client": "^2.1.0"
+    "@actions/http-client": "^2.1.0",
+    "uuid": "^9.0.0"
   }
 }

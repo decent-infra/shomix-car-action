@@ -38,6 +38,10 @@ inputs:
   args:
     description: "The arguments to pass to the command. Format: arg1,arg2,..."
     required: false
+  region:
+    description: "The region to deploy to"
+    required: false
+    default: "any"
 runs:
   using: "node16"
   main: "index.js"
