@@ -4,13 +4,17 @@ const auth = require("@actions/http-client/lib/auth");
 
 const main = async () => {
   try {
-    const time = new Date().toTimeString();
-    console.log(`Time: ${time}`);
-    core.setOutput("time", time);
+    // inputs
+    const token = core.getInput("spheron-token");
+    const clusterName = core.getInput("cluster-name");
+    const clusterUrl = core.getInput("image-url");
+    const image = core.getInput("image");
+    const tag = core.getInput("tag");
+    const healthCheckUrl = core.getInput("health-check-path");
+    const healthCheckPort = core.getInput("health-check-port");
+    const akashMachineImageName = core.getInput("akash-machine-image-name");
 
-    const bearerToken = new auth.BearerCredentialHandler(
-      core.getInput("spheron-token")
-    );
+    const bearerToken = new auth.BearerCredentialHandler(token);
 
     const http = new httpm.HttpClient("http", [bearerToken]);
     const res = await http.get(
@@ -19,6 +23,23 @@ const main = async () => {
     console.log(res.message.statusCode);
     const body = await res.readBody();
     console.log(body);
+
+    const requestBody = {
+      clusterName,
+      clusterUrl,
+      clusterProvider: "DOCKERHUB",
+      organizationId: body.organizations[0].id,
+      healthCheckUrl,
+      healthCheckPort,
+      configuration: {
+        protocol: "akash",
+        image,
+        tag,
+        instanceCount: 1,
+        akashMachineImageName,
+      },
+    };
+    console.log(requestBody);
   } catch (error) {
     core.setFailed(error.message);
   }
