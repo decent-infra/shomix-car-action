@@ -29,6 +29,15 @@ inputs:
   ports:
     description: "The ports to expose. Format: 80:8080,443:8443,..."
     required: false
+  environment-variables:
+    description: "The environment variables to set. Format: key1=value1,key2=value2,..."
+    required: false
+  commands:
+    description: "The commands to run. Format: command1,command2,..."
+    required: false
+  args:
+    description: "The arguments to pass to the command. Format: arg1,arg2,..."
+    required: false
 runs:
   using: "node16"
   main: "index.js"

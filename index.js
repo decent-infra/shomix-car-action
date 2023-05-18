@@ -12,6 +12,13 @@ const mapPorts = (ports) => {
   });
 };
 
+const mapVariables = (variables) => {
+  return variables.split(",").map((variable) => ({
+    value: variable,
+    isSecret: false,
+  }));
+};
+
 const main = async () => {
   try {
     // inputs
@@ -24,6 +31,9 @@ const main = async () => {
     const healthCheckPort = core.getInput("health-check-port");
     const akashMachineImageName = core.getInput("akash-machine-image-name");
     const inputPorts = core.getInput("ports");
+    const inputVariables = core.getInput("environment-variables");
+    const commands = core.getInput("commands");
+    const args = core.getInput("args");
 
     const bearerToken = new auth.BearerCredentialHandler(token);
 
@@ -49,9 +59,13 @@ const main = async () => {
         instanceCount: 1,
         akashMachineImageName,
         ports: mapPorts(inputPorts),
+        env: mapVariables(inputVariables),
+        commands: commands.split(","),
+        args: args.split(","),
       },
     };
-    console.log(requestBody);
+
+    console.log(JSON.stringify(requestBody));
   } catch (error) {
     core.setFailed(error.message);
   }
