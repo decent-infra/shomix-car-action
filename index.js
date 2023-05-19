@@ -49,7 +49,7 @@ const main = async () => {
 
     const requestBody = {
       clusterName,
-      clusterUrl,
+      clusterUrl, // use the image name
       clusterProvider: "DOCKERHUB",
       organizationId: body.organizations[0].id,
       healthCheckUrl: healthCheckUrl ?? "",
