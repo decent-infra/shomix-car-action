@@ -32,6 +32,9 @@ inputs:
   environment-variables:
     description: "The environment variables to set. Format: key1=value1,key2=value2,..."
     required: false
+  secret-environment-variables:
+    description: "The environment variables that need to be passed everythime."
+    required: false
   commands:
     description: "The commands to run. Format: command1,command2,..."
     required: false
