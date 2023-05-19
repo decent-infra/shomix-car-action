@@ -7,17 +7,14 @@ inputs:
   cluster-name:
     description: "The name of the cluster"
     required: true
-  image-url:
-    description: "The url of the docker image to run"
-    required: true
-  image:
+  image: 
     description: "The docker image to run"
     required: true
   tag:
     description: "The tag of the docker image to run"
     required: false
     default: "latest"
-  health-check-path:
+  health-check-path:e
     description: "The path of health check endpoint"
     required: false
   health-check-port:
@@ -29,19 +26,19 @@ inputs:
   ports:
     description: "The ports to expose. Format: 80:8080,443:8443,..."
     required: false
-  environment-variables:
+  env:
     description: "The environment variables to set. Format: key1=value1,key2=value2,..."
     required: false
-  secret-environment-variables:
+  secret-env:
     description: "The environment variables that need to be passed everythime."
     required: false
-  commands:
+  commands: // remove from update
     description: "The commands to run. Format: command1,command2,..."
     required: false
-  args:
+  args: // remove from update
     description: "The arguments to pass to the command. Format: arg1,arg2,..."
     required: false
-  region:
+  region: // remove form update
     description: "The region to deploy to"
     required: false
     default: "any"
