@@ -25,7 +25,6 @@ const main = async () => {
     // inputs
     const token = core.getInput("spheron-token");
     const clusterName = core.getInput("cluster-name");
-    const clusterUrl = core.getInput("image-url");
     const image = core.getInput("image");
     const tag = core.getInput("tag");
     const healthCheckUrl = core.getInput("health-check-path");
@@ -49,14 +48,14 @@ const main = async () => {
 
     const requestBody = {
       clusterName,
-      clusterUrl, // use the image name
+      clusterUrl: image, // use the image name
       clusterProvider: "DOCKERHUB",
       organizationId: body.organizations[0].id,
       healthCheckUrl: healthCheckUrl ?? "",
       healthCheckPort: healthCheckPort ?? "",
       configuration: {
         protocol: "akash",
-        image,
+        image, // check how to pass the image from another provider
         tag,
         instanceCount: 1,
         akashMachineImageName,
